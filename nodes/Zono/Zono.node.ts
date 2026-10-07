@@ -8,7 +8,7 @@ import type {
 	INodeType,
 	INodeTypeDescription,
 } from 'n8n-workflow';
-import { NodeConnectionType, NodeOperationError } from 'n8n-workflow';
+import { NodeApiError, NodeConnectionType, NodeOperationError } from 'n8n-workflow';
 
 import { compact, loadReferenceOptions, zonoApiRequest, zonoApiRequestAllItems } from './GenericFunctions';
 
@@ -51,7 +51,7 @@ export class Zono implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Zono Support',
 		name: 'zono',
-		icon: 'file:zono.svg',
+		icon: { light: 'file:zono.svg', dark: 'file:zono.dark.svg' },
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
@@ -60,6 +60,7 @@ export class Zono implements INodeType {
 		inputs: [NodeConnectionType.Main],
 		outputs: [NodeConnectionType.Main],
 		credentials: [{ name: 'zonoApi', required: true }],
+		usableAsTool: true,
 		properties: [
 			{
 				displayName: 'Resource',
@@ -135,9 +136,9 @@ export class Zono implements INodeType {
 					{ displayName: 'Assignee', name: 'assignee_id', type: 'string', default: '', description: 'A user ID, "me" or "unassigned"' },
 					{ displayName: 'Customer Email', name: 'customer_email', type: 'string', placeholder: 'name@example.com', default: '', description: 'The customer\'s exact email (case-insensitive)' },
 					{ displayName: 'Customer ID', name: 'customer_id', type: 'string', default: '' },
-					{ displayName: 'Priority', name: 'priority', type: 'string', default: '', description: 'low, normal, high, urgent or none; comma-separate several' },
+					{ displayName: 'Priority', name: 'priority', type: 'string', default: '', description: 'Low, normal, high, urgent or none; comma-separate several' },
 					{ displayName: 'Search', name: 'search', type: 'string', default: '', description: 'Matches the subject; a ticket number (1042 or #1042) also matches that ticket' },
-					{ displayName: 'Status', name: 'status', type: 'string', default: '', description: 'open, answered, on-hold or closed; comma-separate several' },
+					{ displayName: 'Status', name: 'status', type: 'string', default: '', description: 'Open, answered, on-hold or closed; comma-separate several' },
 					{ displayName: 'Updated After', name: 'updated_after', type: 'dateTime', default: '' },
 				],
 			},
@@ -261,7 +262,11 @@ export class Zono implements INodeType {
 					continue;
 				}
 
-				throw error;
+				// Keeps the API error's message and details (NodeApiError) and adds the item index.
+				throw new NodeOperationError(this.getNode(), error as Error, {
+					itemIndex: index,
+					description: error instanceof NodeApiError ? (error.description ?? undefined) : undefined,
+				});
 			}
 		}
 

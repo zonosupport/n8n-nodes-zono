@@ -1,4 +1,4 @@
-import type { IAuthenticateGeneric, ICredentialTestRequest, ICredentialType, INodeProperties } from 'n8n-workflow';
+import type { IAuthenticateGeneric, ICredentialTestRequest, ICredentialType, Icon, INodeProperties } from 'n8n-workflow';
 
 /**
  * A Zono team API token (Profile > API & MCP tokens, Premium plan). The
@@ -9,6 +9,8 @@ export class ZonoApi implements ICredentialType {
 	name = 'zonoApi';
 
 	displayName = 'Zono Support API';
+
+	icon: Icon = { light: 'file:../nodes/Zono/zono.svg', dark: 'file:../nodes/Zono/zono.dark.svg' };
 
 	documentationUrl = 'https://zono.support/developers/api';
 

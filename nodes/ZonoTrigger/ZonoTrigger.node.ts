@@ -21,7 +21,7 @@ export class ZonoTrigger implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Zono Support Trigger',
 		name: 'zonoTrigger',
-		icon: 'file:zono.svg',
+		icon: { light: 'file:zono.svg', dark: 'file:zono.dark.svg' },
 		group: ['trigger'],
 		version: 1,
 		subtitle: '={{$parameter["events"].join(", ")}}',
@@ -77,6 +77,7 @@ export class ZonoTrigger implements INodeType {
 					}
 				} catch (error) {
 					// Gone (404) or not readable: create a new subscription.
+					this.logger.debug('Zono webhook subscription not found, creating a new one', { error: (error as Error).message });
 				}
 
 				delete staticData.webhookId;
@@ -109,6 +110,7 @@ export class ZonoTrigger implements INodeType {
 						await zonoApiRequest.call(this, 'DELETE', `/hooks/${encodeURIComponent(String(staticData.webhookId))}`);
 					} catch (error) {
 						// Already gone (token revoked, or removed in Settings > Webhooks).
+						this.logger.debug('Zono webhook subscription was already removed', { error: (error as Error).message });
 					}
 				}
 
