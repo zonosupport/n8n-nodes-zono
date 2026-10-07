@@ -1,0 +1,52 @@
+{
+    "name": "n8n-nodes-zono",
+    "version": "0.1.3",
+    "description": "n8n nodes for Zono Support: a trigger for Zono webhook events and an action node for tickets, replies, notes and customers.",
+    "keywords": [
+        "n8n-community-node-package",
+        "zono",
+        "helpdesk",
+        "support",
+        "tickets"
+    ],
+    "license": "MIT",
+    "homepage": "https://zono.support/help/n8n",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zonosupport/n8n-nodes-zono.git"
+    },
+    "bugs": {
+        "url": "https://github.com/zonosupport/n8n-nodes-zono/issues"
+    },
+    "author": {
+        "name": "Zono Support",
+        "email": "hello@zono.support"
+    },
+    "main": "index.js",
+    "scripts": {
+        "build": "tsc && node scripts/copy-icons.js",
+        "dev": "tsc --watch",
+        "prepublishOnly": "npm run build"
+    },
+    "files": [
+        "dist"
+    ],
+    "n8n": {
+        "n8nNodesApiVersion": 1,
+        "credentials": [
+            "dist/credentials/ZonoApi.credentials.js"
+        ],
+        "nodes": [
+            "dist/nodes/Zono/Zono.node.js",
+            "dist/nodes/ZonoTrigger/ZonoTrigger.node.js"
+        ]
+    },
+    "devDependencies": {
+        "@types/node": "^20.11.0",
+        "n8n-workflow": "~1.70.0",
+        "typescript": "~5.5.4"
+    },
+    "peerDependencies": {
+        "n8n-workflow": "*"
+    }
+}
