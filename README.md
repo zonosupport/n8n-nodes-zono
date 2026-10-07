@@ -25,7 +25,6 @@ The official [n8n](https://n8n.io) nodes for [Zono Support](https://zono.support
 3. Click **Generate token** and copy it. It is shown only once.
 4. In n8n, add a **Zono Support** or **Zono Support Trigger** node and create a new **Zono Support API** credential:
    - **API Token**: the token you copied.
-   - **API Base URL**: leave it as `https://zono.support/api/v1`.
 5. Save. n8n checks the connection straight away.
 
 ## Trigger events

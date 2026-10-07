@@ -12,7 +12,8 @@ import type {
 } from 'n8n-workflow';
 import { NodeApiError } from 'n8n-workflow';
 
-export const DEFAULT_BASE_URL = 'https://zono.support/api/v1';
+/** Zono's REST API v1. The API host is fixed: Zono is only hosted at zono.support. */
+export const ZONO_API_BASE_URL = 'https://zono.support/api/v1';
 
 type ZonoContext = IExecuteFunctions | IHookFunctions | ILoadOptionsFunctions | IWebhookFunctions;
 
@@ -27,12 +28,9 @@ export async function zonoApiRequest(
 	qs: IDataObject = {},
 	options: Partial<IHttpRequestOptions> = {},
 ): Promise<any> {
-	const credentials = await this.getCredentials('zonoApi');
-	const baseUrl = String(credentials.baseUrl || DEFAULT_BASE_URL).replace(/\/+$/, '');
-
 	const request: IHttpRequestOptions = {
 		method,
-		url: `${baseUrl}${endpoint}`,
+		url: `${ZONO_API_BASE_URL}${endpoint}`,
 		qs,
 		json: true,
 		...options,
