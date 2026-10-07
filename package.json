@@ -1,6 +1,6 @@
 {
     "name": "n8n-nodes-zono",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "description": "n8n nodes for Zono Support: a trigger for Zono webhook events and an action node for tickets, replies, notes and customers.",
     "keywords": [
         "n8n-community-node-package",

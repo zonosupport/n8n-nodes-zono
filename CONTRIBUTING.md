@@ -22,9 +22,9 @@ Developer notes for the n8n community node package. The user-facing docs are in 
 
 The product, department, tag and assignee dropdowns are filled from `GET /products`, `/departments`, `/tags` and `/users`.
 
-The **Zono Support API** credential takes a team API token and a base URL, which defaults to `https://zono.support/api/v1`. It is tested against `GET /me`. The trigger needs a read-write token from an owner or admin account.
+The **Zono Support API** credential takes a team API token and always calls `https://zono.support/api/v1`, the only place Zono is hosted. It is tested against `GET /me`. The trigger needs a read-write token from an owner or admin account.
 
-The n8n node uses an API key, while Zapier and Make use OAuth 2.0. OAuth needs a client registered on Zono with a fixed redirect URL, but every self-hosted n8n instance has its own callback URL (`https://<your-n8n>/rest/oauth2-credential/callback`). An API key works with any n8n instance and with self-hosted Zono installs.
+The n8n node uses an API key, while Zapier and Make use OAuth 2.0. OAuth needs a client registered on Zono with a fixed redirect URL, but every self-hosted n8n instance has its own callback URL (`https://<your-n8n>/rest/oauth2-credential/callback`). An API key works with any n8n instance.
 
 ## Build
 

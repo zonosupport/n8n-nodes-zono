@@ -25,13 +25,6 @@ export class ZonoApi implements ICredentialType {
 			description:
 				'A read-write token from Profile > API & MCP tokens in Zono. Use an owner or admin account for the Zono Trigger node.',
 		},
-		{
-			displayName: 'API Base URL',
-			name: 'baseUrl',
-			type: 'string',
-			default: 'https://zono.support/api/v1',
-			description: 'Leave as is',
-		},
 	];
 
 	authenticate: IAuthenticateGeneric = {
@@ -46,7 +39,7 @@ export class ZonoApi implements ICredentialType {
 
 	test: ICredentialTestRequest = {
 		request: {
-			baseURL: '={{$credentials.baseUrl.replace(/\\/+$/, "")}}',
+			baseURL: 'https://zono.support/api/v1',
 			url: '/me',
 		},
 	};

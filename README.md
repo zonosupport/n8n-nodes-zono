@@ -23,9 +23,7 @@ The official [n8n](https://n8n.io) nodes for [Zono Support](https://zono.support
 1. In Zono, open the menu under your name, choose **Profile settings**, then go to **API & MCP Tokens**.
 2. Under **Create a new token**, give it a name (for example "n8n"), pick the team, and click **Read and write**. Optionally set an expiry and your n8n server's IP under **Allowed IPs**.
 3. Click **Generate token** and copy it. It is shown only once.
-4. In n8n, add a **Zono Support** or **Zono Support Trigger** node and create a new **Zono Support API** credential:
-   - **API Token**: the token you copied.
-   - **API Base URL**: leave it as `https://zono.support/api/v1`.
+4. In n8n, add a **Zono Support** or **Zono Support Trigger** node and create a new **Zono Support API** credential. Paste the token you copied as the **API Token**.
 5. Save. n8n checks the connection straight away.
 
 ## Trigger events
